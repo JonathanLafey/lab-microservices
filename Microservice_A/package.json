@@ -1,0 +1,30 @@
+{
+  "name": "Microservice_A",
+  "version": "0.0.1",
+  "description": "Exposes an HTTP Restful API, that allows performing CRUD operations for the management of Fleet entities (i.e: Driver, Car, Trip, etc). Also provides endpoints for assigning a Driver to a Car",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --inspect -r dotenv/config src/server.js",
+    "eslint": "./node_modules/eslint/bin/eslint.js --debug ./src/",
+    "start": "node -r dotenv/config src/server.js"
+  },
+  "author": "Dimitris Argyroudis",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "amqp-connection-manager": "^2.3.2",
+    "amqplib": "^0.5.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "mongoose": "^5.5.11",
+    "winston": "^3.2.1"
+  }
+}

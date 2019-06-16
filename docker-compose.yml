@@ -1,0 +1,59 @@
+version: '3.7'
+# We use an .env file also for the docker-compose https://docs.docker.com/compose/compose-file/#variable-substitution
+services:
+  # This contains rabbitmq server and management plugin to help monitoring
+  rabbitmq:
+    container_name: rabbitmq
+    # https://hub.docker.com/_/rabbitmq/
+    image: rabbitmq:management-alpine
+    ports:
+    - 15672:15672
+    - 5672:5672
+    environment:
+      # https://github.com/docker/compose/issues/4670
+      RABBITMQ_DEFAULT_USER: ${AMQP_USER}
+      RABBITMQ_DEFAULT_PASS: ${AMQP_PASSWORD}
+
+  # Mongo database for Microservice A
+  microservice_a-db:
+    container_name: microservice_a-db
+    # https://hub.docker.com/_/mongo/
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MS_A_DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MS_A_DB_PASS}
+    command: mongod --bind_ip 0.0.0.0
+
+  # Mongo database for Microservice B
+  microservice_b-db:
+    container_name: microservice_b-db
+    # https://hub.docker.com/_/mongo/
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MS_B_DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MS_B_DB_PASS}
+    command: mongod --bind_ip 0.0.0.0
+
+  # microservice_a:
+  #   build:
+  #     context: ./Microservice_A
+  #     dockerfile: ./Microservice_A/Dockerfile
+  #   container_name: microservice_a
+  #   ports:
+  #     - 3001:3000
+  #   depends_on:
+  #     - microservice_a-db
+  #     - rabbitmq
+  #   environment:
+  #     # DB
+  #     DB: ${DB}
+  #     DB_USER: ${MS_A_DB_USER}
+  #     DB_PASS: ${MS_A_DB_PASS}
+  #     DB_SERVER: microservice_a-db
+  #     # RABBITMQ
+  #     RABBITMQ_URI: amqp://${AMQP_USER}:${AMQP_PASSWORD}@rabbitmq:5672
+  #   command: ["npm", "start"]
