@@ -23,22 +23,16 @@ function errorHandler(err, req, res, next) {
 
   // handle mongo errors as 400s
   if (err.name && err.name === 'MongoError') {
-    if (err.length && err.length > 0) {
-      return res.status(400).json({ errors: [err] });
-    }
-    if (err.message) {
-      return res.status(400).json({ errors: [err.toString()] });
-    }
-    return res.status(400).json({ errors: [JSON.stringify(err)] });
+    return res.status(400).json({ error: errorStr });
   }
 
   // handle validation errors
   if (err.name && err.name === 'ValidationError') {
-    return res.status(400).json({ errors: [err.message] });
+    return res.status(400).json({ error: err.message });
   }
 
   // handle the rest of the errors as internal errors
-  return res.status(500).json({ errors: [messages.errors.internalError] });
+  return res.status(500).json({ error: messages.errors.internalError });
 }
 
 module.exports = errorHandler;

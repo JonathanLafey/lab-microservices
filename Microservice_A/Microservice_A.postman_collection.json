@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "fe4d1ba5-65ef-4167-8a9a-cb7569d79002",
+		"name": "Microservice_A",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Cars",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/cars",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Car",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/cars/5d06bf60846c0d1b1d5ffc55",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cars",
+						"5d06bf60846c0d1b1d5ffc55"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Car",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cars/5d06bf60846c0d1b1d5ffc55",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cars",
+						"5d06bf60846c0d1b1d5ffc55"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Car",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"brand\": \"Toyota\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/cars",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"brand\": \"Honda\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/cars/5d06bf60846c0d1b1d5ffc55",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cars",
+						"5d06bf60846c0d1b1d5ffc55"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
