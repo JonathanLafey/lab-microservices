@@ -1,7 +1,7 @@
 {
-  "name": "Microservice_A",
+  "name": "Microservice_C",
   "version": "0.0.1",
-  "description": "Exposes an HTTP Restful API, that allows performing CRUD operations for the management of Fleet entities (i.e: Driver, Car, Trip, etc). Also provides endpoints for assigning a Driver to a Car",
+  "description": "Consumes heartbeats in order to apply penalty points to drivers that are not driving in a behaved manner. 1 Penalty point is added for every Km over 60Km/h, 2 points for over 80Km/h, 5 points for over 100Km/h.",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --inspect -r dotenv/config src/server.js",

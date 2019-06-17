@@ -121,17 +121,20 @@ exports.assignDriver = async (req, res, next) => {
       const car = await Car.findById(req.params.id);
       if (car) {
         // assign the driver
-        car.driver = req.body.driver;
-        const savedCar = await car.save();
+        if (req.body.driver) {
+          car.driver = req.body.driver;
+          const savedCar = await car.save();
 
-        // consider that this car is now being drived
-        // for this scenario, publish it to Microservice_B
-        await publish('driver-assigned-to-car', {
-          car_id: car._id,
-          driver_id: car.driver._id,
-        });
+          // consider that this car is now being drived
+          // for this scenario, publish it to Microservice_B
+          await publish('car-started', {
+            car_id: car._id,
+            driver_id: car.driver._id,
+          });
 
-        return res.json({ data: savedCar });
+          return res.json({ data: savedCar });
+        }
+        return res.status(400).json({ error: messages.errors.driverIsRequired });
       }
       return res.status(404).json({ error: messages.errors.notFound('Car') });
     }

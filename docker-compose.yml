@@ -26,34 +26,65 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MS_A_DB_PASS}
     command: mongod --bind_ip 0.0.0.0
 
-  # Mongo database for Microservice B
-  microservice_b-db:
-    container_name: microservice_b-db
+  # Mongo database for Microservice C
+  microservice_c-db:
+    container_name: microservice_c-db
     # https://hub.docker.com/_/mongo/
     image: mongo:latest
     ports:
       - 27018:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MS_B_DB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MS_B_DB_PASS}
+      MONGO_INITDB_ROOT_USERNAME: ${MS_C_DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MS_C_DB_PASS}
     command: mongod --bind_ip 0.0.0.0
 
-  # microservice_a:
-  #   build:
-  #     context: ./Microservice_A
-  #     dockerfile: ./Microservice_A/Dockerfile
-  #   container_name: microservice_a
-  #   ports:
-  #     - 3001:3000
-  #   depends_on:
-  #     - microservice_a-db
-  #     - rabbitmq
-  #   environment:
-  #     # DB
-  #     DB: ${DB}
-  #     DB_USER: ${MS_A_DB_USER}
-  #     DB_PASS: ${MS_A_DB_PASS}
-  #     DB_SERVER: microservice_a-db
-  #     # RABBITMQ
-  #     RABBITMQ_URI: amqp://${AMQP_USER}:${AMQP_PASSWORD}@rabbitmq:5672
-  #   command: ["npm", "start"]
+  microservice_a:
+    build:
+      context: ./Microservice_A
+    container_name: microservice_a
+    ports:
+      - 3000:3000
+    depends_on:
+      - microservice_a-db
+      - rabbitmq
+    environment:
+      # DB
+      DB: ${MS_A_DB_DB}
+      DB_USER: ${MS_A_DB_USER}
+      DB_PASS: ${MS_A_DB_PASS}
+      DB_SERVER: microservice_a-db
+      # RABBITMQ
+      RABBITMQ_URI: amqp://${AMQP_USER}:${AMQP_PASSWORD}@rabbitmq:5672
+    command: ["npm", "start"]
+
+  microservice_b:
+    build:
+      context: ./Microservice_B
+    container_name: microservice_b
+    ports:
+      - 3001:3000
+    depends_on:
+      - rabbitmq
+    environment:
+      # RABBITMQ
+      RABBITMQ_URI: amqp://${AMQP_USER}:${AMQP_PASSWORD}@rabbitmq:5672
+    command: ["npm", "start"]
+
+  microservice_c:
+    build:
+      context: ./Microservice_C
+    container_name: microservice_c
+    ports:
+      - 3002:3000
+    depends_on:
+      - microservice_c-db
+      - rabbitmq
+    environment:
+      # DB
+      DB: ${MS_C_DB_DB}
+      DB_USER: ${MS_C_DB_USER}
+      DB_PASS: ${MS_C_DB_PASS}
+      DB_SERVER: microservice_c-db
+      # RABBITMQ
+      RABBITMQ_URI: amqp://${AMQP_USER}:${AMQP_PASSWORD}@rabbitmq:5672
+    command: ["npm", "start"]
