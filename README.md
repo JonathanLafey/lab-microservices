@@ -14,6 +14,7 @@ You'll need to install Docker and Docker Compose on your system, following the l
 
 After having install Docker and Docker Compose, you simply have to create and run the containers.
 
+Run `cp .env.dist .env` so we prepare an environment for the docker-compose.
 Run `docker-compose up --build --detach` on the root of the project.
 
 This should download all required images, create 2 mongodb databases, a rabbitmq server and fire up the 3 microservices.
