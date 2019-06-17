@@ -12,6 +12,7 @@ const DriversSchema = mongoose.Schema({
   driver: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Driver',
+    required: true,
   },
   assignment_date: {
     type: Date,
@@ -27,7 +28,11 @@ module.exports = mongoose.model('Car', mongoose.Schema({
     type: String,
     required: true,
   },
-  drivers: [DriversSchema],
+  driver: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Driver',
+    required: true,
+  },
   registration_date: {
     type: Date,
     default: Date.now,

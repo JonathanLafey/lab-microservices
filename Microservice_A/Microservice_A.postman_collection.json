@@ -29,6 +29,29 @@
 			"response": []
 		},
 		{
+			"name": "Get Drivers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/drivers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get Car",
 			"request": {
 				"method": "GET",
@@ -40,12 +63,36 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/cars/5d06bf60846c0d1b1d5ffc55",
+					"raw": "{{url}}/cars/5d075ff1fce6c154db5658cc",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"cars",
+						"5d075ff1fce6c154db5658cc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Driver",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/drivers/5d06bf60846c0d1b1d5ffc55",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"drivers",
 						"5d06bf60846c0d1b1d5ffc55"
 					]
 				}
@@ -58,13 +105,31 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/cars/5d06bf60846c0d1b1d5ffc55",
+					"raw": "{{url}}/cars/5d075ff1fce6c154db5658cc",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"cars",
-						"5d06bf60846c0d1b1d5ffc55"
+						"5d075ff1fce6c154db5658cc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Driver",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/drivers/5d075dd8fce6c154db5658cb",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"drivers",
+						"5d075dd8fce6c154db5658cb"
 					]
 				}
 			},
@@ -99,15 +164,72 @@
 			"response": []
 		},
 		{
-			"name": "Update Client Copy",
+			"name": "Assign driver to car",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"driver\": \"5d075dd8fce6c154db5658cb\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/cars/5d075ff1fce6c154db5658cc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cars",
+						"5d075ff1fce6c154db5658cc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Driver",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Tester\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/drivers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"drivers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Car",
 			"request": {
 				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
@@ -122,6 +244,35 @@
 					"path": [
 						"cars",
 						"5d06bf60846c0d1b1d5ffc55"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Driver",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Real Tester\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/drivers/5d075dd8fce6c154db5658cb",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"drivers",
+						"5d075dd8fce6c154db5658cb"
 					]
 				}
 			},
