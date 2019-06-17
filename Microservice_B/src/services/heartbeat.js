@@ -41,7 +41,7 @@ function startHeartbeat(carId, driverId) {
  * @param {Number} carId
  */
 function stopHeartbeat(carId) {
-  // TODO: fix that not working
+  // TODO: fix that as it's not working
   const interval = intervalMap.get({
     car_id: carId,
   });
